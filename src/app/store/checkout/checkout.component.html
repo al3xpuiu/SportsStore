@@ -1,3 +1,35 @@
-<p>
-  checkout works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col bg-dark text-white">
+      <a class="navbar-brand">SPORTS STORE</a>
+    </div>
+  </div>
+
+  <div *ngIf="orderSent">
+    <h2>Thanks!</h2>
+    <p>Thanks for placing your order.</p>
+    <p>We'll ship your goods as soon as possible</p>
+    <button routerLink="/store">
+      Return to store
+    </button>
+  </div>
+
+  <form *ngIf="!orderSent" #form="ngForm" novalidate
+      (ngSubmit)="submitOrder(form)">
+
+    <div>
+      <label>Name</label>
+      <input #name="ngModel" name="name" [(ngModel)]="order.name" required/>
+      <span *ngIf="submitted && name.invalid">
+        Please enter your name
+      </span>
+    </div>
+    <div>
+      <label>Address</label>
+      <input #address="ngModel"  name="address" [(ngModel)]="order.address" required=""/>
+      <span *ngIf="submitted && address.invalid">
+        Please enter your address
+      </span>
+    </div>
+  </form>
+</div>
